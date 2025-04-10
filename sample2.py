@@ -13,9 +13,8 @@ def ChannelSubract(channelID, value):
 
 def ChannelAdd(channelID, value):
     global multiChannel
-
     currentValue = ChannelGetValue(channelID)
-    currentValue -= value
+    currentValue += value #This line was subtracting instead of adding, thus causing the wrong input. Replaced - with +.
     if not ValidateValue(currentValue): return
     ChannelSetValue(channelID, currentValue)
 
@@ -36,7 +35,9 @@ def ChannelClear(channelID):
         multiChannel -= channelValue
 
 def ValidateValue(value):
-    if value < 999 and value > 0: 
+    #This if statement had the second error, which was the (<,>) symbols requiring the = after each for the correct output.
+    #without the equal signs, the max number for the value would be 998 instead of 999 and the min number would be 1 instead of 0.
+    if value <= 999 and value >= 0: 
         return True
     else:
         print("Value out of range, operation not performed") 
